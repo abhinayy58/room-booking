@@ -8,7 +8,8 @@ const updateUser = async (req, res, next) => {
       { $set: req.body },
       { new: true }
     );
-    res.status(200).json(updatedUser);
+    const {password,isAdmin,...otherDetails} = updatedUser._doc
+    res.status(200).json({isAdmin,details:otherDetails});
   } catch (err) {
     next(err);
   }
